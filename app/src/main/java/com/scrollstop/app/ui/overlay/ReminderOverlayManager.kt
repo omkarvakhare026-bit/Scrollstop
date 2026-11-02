@@ -14,12 +14,12 @@ import android.view.WindowManager
 import androidx.compose.ui.platform.ComposeView
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelStore
-import androidx.lifecycle.ViewTreeLifecycleOwner
-import androidx.lifecycle.ViewTreeViewModelStoreOwner
+import androidx.lifecycle.setViewTreeLifecycleOwner
+import androidx.lifecycle.setViewTreeViewModelStoreOwner
 import androidx.savedstate.SavedStateRegistry
 import androidx.savedstate.SavedStateRegistryController
 import androidx.savedstate.SavedStateRegistryOwner
-import androidx.savedstate.ViewTreeSavedStateRegistryOwner
+import androidx.savedstate.setViewTreeSavedStateRegistryOwner
 import com.scrollstop.app.ScrollStopApp
 import com.scrollstop.app.data.local.entity.MotivationalItemEntity
 import com.scrollstop.app.ui.theme.ScrollStopTheme
@@ -108,9 +108,9 @@ object ReminderOverlayManager {
             lifecycleOwner.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
 
             val composeView = ComposeView(context).apply {
-                ViewTreeLifecycleOwner.set(this, lifecycleOwner)
-                ViewTreeViewModelStoreOwner.set(this, lifecycleOwner)
-                ViewTreeSavedStateRegistryOwner.set(this, lifecycleOwner)
+                setViewTreeLifecycleOwner(lifecycleOwner)
+                setViewTreeViewModelStoreOwner(lifecycleOwner)
+                setViewTreeSavedStateRegistryOwner(lifecycleOwner)
 
                 setContent {
                     ScrollStopTheme {

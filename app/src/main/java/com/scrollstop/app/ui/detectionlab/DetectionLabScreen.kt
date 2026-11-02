@@ -168,6 +168,8 @@ fun DetectionLabScreen(
                     labelColor = TextSecondary
                 ),
                 border = FilterChipDefaults.filterChipBorder(
+                    enabled = true,
+                    selected = filterReelsOnly,
                     borderColor = if (filterReelsOnly) StopRed else SurfaceBorderDark,
                     selectedBorderColor = StopRed
                 )
