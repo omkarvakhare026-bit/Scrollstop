@@ -226,6 +226,7 @@ object ReminderOverlayManager {
         override val savedStateRegistry: SavedStateRegistry get() = savedStateRegistryController.savedStateRegistry
 
         fun performRestore(savedState: android.os.Bundle?) {
+            savedStateRegistryController.performAttach()
             savedStateRegistryController.performRestore(savedState)
         }
 

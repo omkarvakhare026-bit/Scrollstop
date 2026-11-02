@@ -18,13 +18,9 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.BatteryAlert
-import androidx.compose.material.icons.filled.Check
-import androidx.compose.material.icons.filled.Layers
-import androidx.compose.material.icons.filled.LockOpen
 import androidx.compose.material.icons.filled.OpenInNew
 import androidx.compose.material.icons.filled.PhoneAndroid
-import androidx.compose.material.icons.filled.Security
+import com.scrollstop.app.util.RedmiMiuiHelper
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
