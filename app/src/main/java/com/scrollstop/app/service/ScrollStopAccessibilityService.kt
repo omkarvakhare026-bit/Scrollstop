@@ -1,7 +1,6 @@
 package com.scrollstop.app.service
 
 import android.accessibilityservice.AccessibilityService
-import android.accessibilityservice.AccessibilityServiceInfo
 import android.view.accessibility.AccessibilityEvent
 import android.view.accessibility.AccessibilityNodeInfo
 import com.scrollstop.app.ScrollStopApp
@@ -29,13 +28,8 @@ class ScrollStopAccessibilityService : AccessibilityService() {
     override fun onServiceConnected() {
         super.onServiceConnected()
         DetectionLabState.updateServiceStatus(true)
-
-        // Ensure accessibility service configuration has window content inspection flags
-        serviceInfo = serviceInfo.apply {
-            flags = flags or
-                    AccessibilityServiceInfo.FLAG_REPORT_VIEW_IDS or
-                    AccessibilityServiceInfo.FLAG_RETRIEVE_INTERACTIVE_WINDOWS
-        }
+        // Service configuration is fully declared in res/xml/accessibility_service_config.xml
+        // No runtime flag overrides needed.
     }
 
     override fun onAccessibilityEvent(event: AccessibilityEvent?) {

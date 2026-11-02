@@ -1,8 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    AccessibilityService configuration for ScrollStop.
+
+    Purpose: Detect when the user is watching Instagram Reels or YouTube Shorts
+    so a motivational reminder can be shown after every N reels.
+
+    canRetrieveWindowContent="true" is required to inspect view IDs (e.g.
+    "reel_viewer_root", "shorts_container") to confirm the Reels/Shorts screen
+    is active. No user content, text, or personal data is read or transmitted.
+    All processing happens on-device.
+
+    Monitored packages: com.instagram.android, com.google.android.youtube only.
+    All other packages are explicitly ignored in onAccessibilityEvent().
+-->
 <accessibility-service xmlns:android="http://schemas.android.com/apk/res/android"
     android:description="@string/accessibility_service_description"
-    android:accessibilityEventTypes="typeWindowStateChanged|typeWindowContentChanged|typeViewScrolled"
+    android:accessibilityEventTypes="typeWindowStateChanged|typeViewScrolled"
     android:accessibilityFeedbackType="feedbackGeneric"
-    android:notificationTimeout="50"
+    android:notificationTimeout="100"
     android:canRetrieveWindowContent="true"
-    android:accessibilityFlags="flagDefault|flagRetrieveInteractiveWindows|flagReportViewIds" />
+    android:accessibilityFlags="flagDefault|flagReportViewIds" />
