@@ -1,0 +1,64 @@
+name: Build ScrollStop Debug APK
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Assemble Debug APK
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'gradle'
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install Android Platform & Build Tools
+        run: |
+          sdkmanager --install "platforms;android-34" "build-tools;34.0.0"
+
+      - name: Grant Execute Permission for Gradlew
+        run: chmod +x gradlew
+
+      - name: Build Debug APK
+        run: ./gradlew assembleDebug --stacktrace --no-daemon
+
+      - name: Verify APK Exists
+        run: |
+          if [ -f app/build/outputs/apk/debug/app-debug.apk ]; then
+            echo "SUCCESS: app-debug.apk generated successfully."
+            ls -lh app/build/outputs/apk/debug/app-debug.apk
+          else
+            echo "ERROR: APK file not found at expected location!"
+            exit 1
+          fi
+
+      - name: Upload Debug APK Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ScrollStop-Debug-APK
+          path: app/build/outputs/apk/debug/app-debug.apk
+          retention-days: 14
+
+      - name: Build Failure Diagnostics
+        if: failure()
+        run: |
+          echo "==== GRADLE BUILD FAILED ===="
+          echo "Review above logs or gradle stacktrace for exact error details."

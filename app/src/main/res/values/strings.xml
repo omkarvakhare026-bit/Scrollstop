@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ScrollStop</string>
+    <string name="accessibility_service_label">ScrollStop Reel Guard</string>
+    <string name="accessibility_service_description">Monitors Instagram Reels and YouTube Shorts to count scrolls and display motivational interventions to stop mindless dopamine scrolling.</string>
+</resources>
